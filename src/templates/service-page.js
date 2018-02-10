@@ -3,10 +3,10 @@ import graphql from 'graphql';
 import Helmet from 'react-helmet';
 import Content, { HTMLContent } from '../components/Content';
 
-export const BlogPostTemplate = ({
+export const ServicePostTemplate = ({
   content, contentComponent, description, title, helmet,
 }) => {
-  const PostContent = contentComponent || Content;
+  const ServiceContent = contentComponent || Content;
 
   return (
     <section className="section">
@@ -27,7 +27,7 @@ export const BlogPostTemplate = ({
 export default ({ data }) => {
   const { markdownRemark: post } = data;
 
-  return (<BlogPostTemplate
+  return (<ServicePostTemplate
     content={post.html}
     contentComponent={HTMLContent}
     description={post.frontmatter.description}
@@ -37,7 +37,7 @@ export default ({ data }) => {
 };
 
 export const pageQuery = graphql`
-  query BlogPostByPath($path: String!) {
+  query ServicePostByPath($path: String!) {
     markdownRemark(frontmatter: { path: { eq: $path } }) {
       html
       frontmatter {
@@ -45,6 +45,7 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         title
         description
+        price
       }
     }
   }
